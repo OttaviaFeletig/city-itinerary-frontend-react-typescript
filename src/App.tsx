@@ -7,7 +7,7 @@ import { pageStyle } from "./styles/Styles";
 const App: React.FC = () => {
   const { bottom } = pageStyle();
   return (
-    <div className={bottom}>
+    <div>
       <Router>
         <Route exact path="/" component={HomeP} />
         <Route exact path="/cities" component={CityP} />

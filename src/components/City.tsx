@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 interface Props {
   city: string;
 }
-const Carousel: React.FC<Props> = ({ city }) => {
+const City: React.FC<Props> = ({ city }) => {
   return (
     <div>
       <CardActionArea>
@@ -36,4 +36,4 @@ const Carousel: React.FC<Props> = ({ city }) => {
     </div>
   );
 };
-export default Carousel;
+export default City;
