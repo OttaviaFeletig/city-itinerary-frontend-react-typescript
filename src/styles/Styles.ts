@@ -15,11 +15,5 @@ export const navigationStyle = makeStyles({
 export const pageStyle = makeStyles({
   page: {
     paddingBottom: "56px"
-  },
-  bottom: {
-    // height: "100vh",
-    // display: "flex",
-    // flexDirection: "column",
-    // justifyContent: "space-between"
   }
 });
