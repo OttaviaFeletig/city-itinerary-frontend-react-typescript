@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
 import City from "../components/City";
 import { pageStyle } from "../styles/Styles";
+import { getCities } from "../store/actions/cityAction";
+// import { Props } from "../@types/index";
 
 const CityP: React.FC = () => {
   const cities: Array<string> = [
@@ -11,6 +14,12 @@ const CityP: React.FC = () => {
     "https://runnerbeantours.com/wp-content/uploads/2015/08/houses-in-el-raval-barcelona-880x587.jpg"
   ];
   const { page } = pageStyle();
+  const dispatch = useDispatch();
+  const test = useSelector((state: any) => state);
+  console.log("test", test);
+  useEffect(() => {
+    dispatch(getCities());
+  });
   return (
     <Box className={page}>
       <Card>

@@ -4,9 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-interface Props {
-  city: string;
-}
+import { Props } from "../@types/index";
 const City: React.FC<Props> = ({ city }) => {
   return (
     <Box>
