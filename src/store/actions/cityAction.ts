@@ -1,9 +1,10 @@
-import { GET_CITIES, ERROR_CITIES, CityActionTypes } from "../types/city/index";
-import { CityI } from "../../@types/index";
+import { CityActionTypes } from "../../@types/store/city";
+import { GET_CITIES, ERROR_CITIES } from "../constants";
+import { CityI } from "../../@types/city";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
 import { Action } from "redux";
-const getCitiesAction = (cities: CityI): CityActionTypes => {
+const getCitiesAction = (cities: Array<CityI>): CityActionTypes => {
+  console.log("cities in get cities action", cities);
   return {
     type: GET_CITIES,
     payload: cities
@@ -25,8 +26,8 @@ export const getCities = (): ThunkAction<
     const res = await fetch("http://localhost:5000/api/cities/");
     let data = await res.json();
     console.log("data", data);
-    getCitiesAction(data);
+    dispatch(getCitiesAction(data));
   } catch (error) {
-    errorCitiesAction(error);
+    dispatch(errorCitiesAction(error));
   }
 };

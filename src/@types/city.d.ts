@@ -3,6 +3,6 @@ export interface CityI {
   country: string;
   picture: string;
 }
-export interface Props {
-  city: string;
+export interface CityProps {
+  city: CityI;
 }

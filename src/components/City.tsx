@@ -4,8 +4,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import { Props } from "../@types/index";
-const City: React.FC<Props> = ({ city }) => {
+import { CityProps } from "../@types/city";
+const City: React.FC<CityProps> = ({ city }) => {
   return (
     <Box>
       <CardActionArea>
@@ -14,11 +14,11 @@ const City: React.FC<Props> = ({ city }) => {
           alt="berlin"
           height="140"
           title="Contemplative Reptile"
-          image={city}
+          image={city.picture}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            city name
+            {city.name}
           </Typography>
         </CardContent>
       </CardActionArea>

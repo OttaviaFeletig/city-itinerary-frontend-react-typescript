@@ -1,22 +1,19 @@
-import {
-  GET_CITIES,
-  ERROR_CITIES,
-  CityActionTypes,
-  CityState
-} from "../types/city/index";
-import { CityI } from "../../@types/index";
+import { CityActionTypes, CityState } from "../../@types/store/city";
+import { GET_CITIES, ERROR_CITIES } from "../constants";
 
 const initState: CityState = {
   cities: [],
   error: null
 };
 
-const cityReducer = (state = initState, action: CityActionTypes): CityState => {
+const cityReducer = (state = initState, action: CityActionTypes): any => {
+  console.log("action", action.type);
+  console.log("state", state);
   switch (action.type) {
     case GET_CITIES:
       return {
         ...state,
-        cities: [...state.cities, action.payload]
+        cities: action.payload
       };
     case ERROR_CITIES:
       return {

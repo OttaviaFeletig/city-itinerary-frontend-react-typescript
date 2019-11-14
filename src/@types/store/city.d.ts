@@ -1,16 +1,13 @@
-import { CityI } from "../../../@types/index";
-
-export const GET_CITIES = "GET_CITIES";
-export const ERROR_CITIES = "ERROR_CITIES";
+import { CityI } from "../city";
 
 export interface CityState {
-  cities: CityI[];
+  cities: Array<CityI>;
   error: Error | null;
 }
 
 interface GetCitiesAction {
   type: typeof GET_CITIES;
-  payload: CityI;
+  payload: Array<CityI>;
 }
 
 interface ErrorCitiesAction {
