@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Navigation: React.FC = () => {
   const { banner, icons } = navigationStyle();
-  const [value, setValue] = React.useState("recents");
+  const [value, setValue] = React.useState("home");
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
   };

@@ -1,5 +1,5 @@
 import { CityState } from "./city";
 
-// export interface AppStore{
-//     cities: CityState
-// }
+export interface AppStore {
+  cities: CityState;
+}

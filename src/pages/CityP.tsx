@@ -5,22 +5,24 @@ import Box from "@material-ui/core/Box";
 import City from "../components/City";
 import { pageStyle } from "../styles/Styles";
 import { getCities } from "../store/actions/cityAction";
-import { CityI } from "../@types/city";
-
+import { CityI, CitiesT } from "../@types/city";
+import { AppStore } from "../@types/store/index";
+import { CityState } from "../@types/store/city";
+import AddButton from "../components/AddButton";
 const CityP: React.FC = () => {
   const { page } = pageStyle();
   const dispatch = useDispatch();
-  const state = useSelector((state: any) => state.cities);
-  const { cities } = state;
-  console.log("cities", cities);
-  console.log("state", state.cities);
+  const cityState: CityState = useSelector((state: AppStore) => state.cities);
+  const { cities }: { cities: CitiesT } = cityState;
+  const { error }: { error: CityState["error"] } = cityState;
   useEffect(() => {
     dispatch(getCities());
   }, []);
   return (
     <Box className={page}>
+      <AddButton />
       <Card>
-        {cities &&
+        {error === null &&
           cities.map((city: CityI, index: number) => {
             return <City city={city} key={index} />;
           })}

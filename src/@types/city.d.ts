@@ -3,6 +3,7 @@ export interface CityI {
   country: string;
   picture: string;
 }
+export type CitiesT = Array<CityI>;
 export interface CityProps {
   city: CityI;
 }

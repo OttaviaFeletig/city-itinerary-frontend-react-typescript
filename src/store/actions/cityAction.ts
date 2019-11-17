@@ -1,16 +1,20 @@
-import { CityActionTypes } from "../../@types/store/city";
+import {
+  CityActionTypes,
+  GetCitiesAction,
+  ErrorCitiesAction
+} from "../../@types/store/city";
 import { GET_CITIES, ERROR_CITIES } from "../constants";
 import { CityI } from "../../@types/city";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { Action } from "redux";
-const getCitiesAction = (cities: Array<CityI>): CityActionTypes => {
+const getCitiesAction = (cities: Array<CityI>): GetCitiesAction => {
   console.log("cities in get cities action", cities);
   return {
     type: GET_CITIES,
     payload: cities
   };
 };
-const errorCitiesAction = (error: Error): CityActionTypes => {
+const errorCitiesAction = (error: Error): ErrorCitiesAction => {
   return {
     type: ERROR_CITIES,
     payload: error
