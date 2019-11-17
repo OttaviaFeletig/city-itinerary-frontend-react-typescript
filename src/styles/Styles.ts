@@ -43,5 +43,13 @@ export const modalStyle = makeStyles({
     border: "2px solid #000",
     boxShadow: "5px 10x",
     padding: "10px"
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  button: {
+    background: "#FF9500",
+    color: "white"
   }
 });
