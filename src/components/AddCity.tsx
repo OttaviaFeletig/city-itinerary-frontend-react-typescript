@@ -1,19 +1,30 @@
 import React from "react";
 import { Typography, Input, Button, Box } from "@material-ui/core";
 import { modalStyle } from "../styles/Styles";
+import { postCity } from "../store/actions/cityAction";
+import { CityI } from "../@types/city";
+import { useDispatch } from "react-redux";
 const AddCity: React.FC = () => {
+  const dispatch = useDispatch();
   const { button, form } = modalStyle();
   const [values, setValues] = React.useState({
     name: "",
     country: "",
     picture: ""
   });
-  const handleChange = (e: any): any => {
-    const { name, value } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value }: { name: string; value: string } = e.currentTarget;
     setValues({ ...values, [name]: value });
   };
-  const handleSubmit = () => {
-    console.log("values", values);
+  const handleSubmit = (): void => {
+    const {
+      name,
+      country,
+      picture
+    }: { name: string; country: string; picture: string } = values;
+    const newCity: CityI = { name, country, picture };
+    console.log("newCity", newCity);
+    dispatch(postCity(newCity));
   };
   return (
     <React.Fragment>
@@ -26,7 +37,7 @@ const AddCity: React.FC = () => {
           name="name"
           type="text"
           value={values.name}
-          onChange={e => handleChange(e)}
+          onChange={handleChange}
           required
         />
         <Input
@@ -34,7 +45,7 @@ const AddCity: React.FC = () => {
           name="country"
           type="text"
           value={values.country}
-          onChange={e => handleChange(e)}
+          onChange={handleChange}
           required
         />
         <Input
@@ -42,7 +53,7 @@ const AddCity: React.FC = () => {
           name="picture"
           type="text"
           value={values.picture}
-          onChange={e => handleChange(e)}
+          onChange={handleChange}
           required
         />
         <Button className={button} onClick={handleSubmit}>

@@ -1,6 +1,6 @@
 import { CityI } from "../city";
 import { Action } from "redux";
-import { GET_CITIES, ERROR_CITIES } from "../../store/constants";
+import { GET_CITIES, ERROR_CITIES, POST_CITY } from "../../store/constants";
 export interface CityState {
   cities: Array<CityI>;
   error: Error | null;
@@ -16,4 +16,12 @@ export interface ErrorCitiesAction {
   payload: Error;
 }
 
-export type CityActionTypes = GetCitiesAction | ErrorCitiesAction;
+export interface PostCitiesAction {
+  type: typeof POST_CITY;
+  payload: CityI;
+}
+
+export type CityActionTypes =
+  | GetCitiesAction
+  | ErrorCitiesAction
+  | PostCitiesAction;

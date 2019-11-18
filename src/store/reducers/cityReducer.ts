@@ -1,10 +1,5 @@
-import {
-  CityActionTypes,
-  CityState,
-  GetCitiesAction,
-  ErrorCitiesAction
-} from "../../@types/store/city";
-import { GET_CITIES, ERROR_CITIES } from "../constants";
+import { CityActionTypes, CityState } from "../../@types/store/city";
+import { GET_CITIES, ERROR_CITIES, POST_CITY } from "../constants";
 
 const initState: CityState = {
   cities: [],
@@ -20,10 +15,15 @@ const cityReducer = (state = initState, action: CityActionTypes): CityState => {
         ...state,
         cities: action.payload
       };
-    case "ERROR_CITIES":
+    case ERROR_CITIES:
       return {
         ...state,
         error: action.payload
+      };
+    case POST_CITY:
+      return {
+        ...state,
+        cities: [...state.cities, action.payload]
       };
     default:
       return state;

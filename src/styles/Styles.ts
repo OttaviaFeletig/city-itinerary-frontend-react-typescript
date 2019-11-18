@@ -40,9 +40,9 @@ export const modalStyle = makeStyles({
   },
   paper: {
     backgroundColor: "white",
-    border: "2px solid #000",
-    boxShadow: "5px 10x",
-    padding: "10px"
+    border: "2px solid #FF9500",
+    padding: "10px",
+    width: "50%"
   },
   form: {
     display: "flex",
@@ -50,6 +50,7 @@ export const modalStyle = makeStyles({
   },
   button: {
     background: "#FF9500",
-    color: "white"
+    color: "white",
+    marginTop: "20px"
   }
 });
