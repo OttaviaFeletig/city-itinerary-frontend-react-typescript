@@ -4,11 +4,13 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import CitiesContextProvider from "./context/cities/CityContext";
 ReactDOM.render(
-  <Provider store={store}>
+  // <Provider store={store}>
+  <CitiesContextProvider>
     <App />
-  </Provider>,
+  </CitiesContextProvider>,
+  // </Provider>
   document.getElementById("root")
 );
 
