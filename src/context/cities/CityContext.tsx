@@ -21,7 +21,6 @@ const CitiesContextProvider = (props: { children: React.ReactNode }) => {
   // const [getState, setState] = useState(initCities);
   // // const [initCities, dispatch] = useReducer(CitiesReducer, []);
   const getCities = async () => {
-    console.log("here");
     try {
       const res: AxiosResponse<CitiesT> = await axios.get(
         "http://localhost:5000/api/cities/"
@@ -39,8 +38,10 @@ const CitiesContextProvider = (props: { children: React.ReactNode }) => {
       });
     }
   };
-  const postCity = (newCity: CityI) => async () => {
+  const postCity = async (newCity: CityI) => {
     try {
+      console.log("here");
+      console.log(newCity);
       const res = await axios.post(
         "http://localhost:5000/api/cities/",
         newCity
