@@ -14,6 +14,7 @@ const CitiesReducer = (state: any, action: any) => {
         error: action.payload
       };
     case CityContextActionTypes.POST_CITY:
+      console.log("in post city reducer");
       return {
         ...state,
         cities: [...state.cities, action.payload]

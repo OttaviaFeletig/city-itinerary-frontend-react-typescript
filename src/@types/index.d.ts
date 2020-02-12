@@ -2,7 +2,7 @@
 interface CityI {
   name: string;
   country: string;
-  picture: string;
+  picture: any;
 }
 type CitiesT = Array<CityI>;
 //context

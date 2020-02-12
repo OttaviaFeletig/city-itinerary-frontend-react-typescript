@@ -46,6 +46,7 @@ const CitiesContextProvider = (props: { children: React.ReactNode }) => {
         "http://localhost:5000/api/cities/",
         newCity
       );
+      console.log(res);
       let { data }: { data: CityI } = await res;
       console.log("data", data);
       dispatch({

@@ -13,15 +13,21 @@ import Autocomplete, {
   AutocompleteClassKey
 } from "@material-ui/lab/Autocomplete";
 import { ButtonBaseClassKey } from "@material-ui/core/ButtonBase";
+import axios from "axios";
+import firebase from "firebase/app";
+// import storage from "../Firebase/index";
+const storage = require("../Firebase/index");
 const countries = require("countries-cities").getCountries();
 let cities: Array<string> = [];
+
 const AddCity: React.FC<FunctionProps> = ({ handleClose }) => {
   const { state, postCity } = useContext(CitiesContext);
   const { button, form } = modalStyle();
   const [values, setValues] = React.useState({
     name: "",
     country: "",
-    picture: ""
+    picture: {},
+    progress: 0
   });
   const typeCountry = (e: ChangeEvent<any>): void => {
     setValues({ ...values, country: e.currentTarget.value });
@@ -34,8 +40,6 @@ const AddCity: React.FC<FunctionProps> = ({ handleClose }) => {
       console.log("button type");
       setValues({ ...values, country: "" });
     } else {
-      console.log("here");
-      // console.log(e.currentTarget.type);
       const value: string = e.currentTarget.innerHTML;
       setValues({ ...values, country: value });
       cities = require("countries-cities").getCities(value);
@@ -49,16 +53,48 @@ const AddCity: React.FC<FunctionProps> = ({ handleClose }) => {
       setValues({ ...values, name: value });
     }
   };
-  const handlePictureChange = (e: ChangeEvent<any>) => {
-    setValues({ ...values, picture: e.currentTarget.value });
+
+  const handlePictureChange = async (e: ChangeEvent<any>) => {
+    console.log(e.target.files[0]);
+    const file = e.target.files[0];
+
+    handlePictureUpload(file);
   };
-  const handleSubmit = (): void => {
+  const handlePictureUpload = async (file: any) => {
+    const storageService = firebase.storage().ref();
+
+    const uploadTask = storageService.child(`images/${file.name}`).put(file);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setValues({ ...values, progress });
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        firebase
+          .storage()
+          .ref("images")
+          .child(`${file.name}`)
+          .getDownloadURL()
+          .then(url => {
+            setValues({ ...values, picture: url });
+          });
+      }
+    );
+  };
+  const handleSubmit = async () => {
     const {
       name,
       country,
       picture
-    }: { name: string; country: string; picture: string } = values;
+    }: { name: string; country: string; picture: object } = values;
     const newCity: CityI = { name, country, picture };
+    console.log("newCity", newCity);
     postCity(newCity);
     handleClose();
   };
@@ -113,14 +149,26 @@ const AddCity: React.FC<FunctionProps> = ({ handleClose }) => {
             />
           )}
         />
-        <Input
+        {/* <Input
           placeholder="picture"
           name="picture"
           type="text"
           value={values.picture}
           onChange={handlePictureChange}
           required
+        /> */}
+        <Input
+          id="image-input"
+          // className={classes.input}
+          // accept="image/*"
+          type="file"
+          // multiple
+          // {...input}
+          onChange={handlePictureChange}
         />
+        <div className="row">
+          <progress value={values.progress} max="100" className="progress" />
+        </div>
         <Button className={button} onClick={handleSubmit}>
           Submit
         </Button>
