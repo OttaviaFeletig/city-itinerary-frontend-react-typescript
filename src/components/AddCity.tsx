@@ -15,7 +15,6 @@ import Autocomplete, {
 import { ButtonBaseClassKey } from "@material-ui/core/ButtonBase";
 import axios from "axios";
 import firebase from "firebase/app";
-// import storage from "../Firebase/index";
 const storage = require("../Firebase/index");
 const countries = require("countries-cities").getCountries();
 let cities: Array<string> = [];
