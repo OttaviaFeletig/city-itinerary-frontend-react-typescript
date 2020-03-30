@@ -7,31 +7,15 @@ import { pageStyle } from "../styles/Styles";
 import AddButton from "../components/AddButton";
 const CityP: React.FC = () => {
   const { page } = pageStyle();
-  const { state, getCities } = useContext(CitiesContext);
-  const { cities }: { cities: CitiesT } = state;
-  const { error }: { error: Error | null } = state;
+  const { cities, error, getCities } = useContext(CitiesContext);
+  // const { cities }: { cities: CitiesT } = initCities;
+  // const { error }: { error: Error | null } = initCities;
   useEffect(() => {
     getCities();
   }, []);
-  console.log(state);
-  // const test = () => {
-  //   navigator.mediaDevices
-  //     .getUserMedia({ video: true })
-  //     .then(function(stream) {
-  //       /* use the stream */
-  //       console.log(stream);
-  //     })
-  //     .catch(function(err) {
-  //       /* handle the error */
-  //     });
-  // };
-  // const picChange = (e: ChangeEvent<any>) => {
-  //   console.log("e", e.target.files);
-  // };
+
   return (
     <Box className={page}>
-      {/* <div onClick={test}>click me</div> */}
-      {/* <input type="file" accept="image/*" onChange={picChange} /> */}
       <AddButton />
       <Card>
         {error === null &&

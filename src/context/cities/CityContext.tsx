@@ -3,20 +3,30 @@ import axios, { AxiosResponse } from "axios";
 import CitiesReducer from "./CityReducers";
 import { CityContextActionTypes } from "../type";
 
-const initCities: InitCitiesI = {
+const citiesContext: CitiesContextI = {
   cities: [],
-  error: null
+  error: null,
+
+  getCities: () => {
+    throw new Error("getCities not implemented");
+  },
+  postCity: () => {
+    throw new Error("postCities not implemented");
+  }
 };
-// interface CitiesContextI {
-//   initCities: InitCitiesI;
-//   getCities(): void;
-// }
-export const CitiesContext = createContext<InitCitiesI | any>({ initCities });
+interface CitiesContextI {
+  cities: CitiesT;
+  error: Error | null;
+  getCities(): void;
+  postCity(newCity: CityI): void;
+}
+
+export const CitiesContext = createContext<CitiesContextI>(citiesContext);
 
 const CitiesContextProvider = (props: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(CitiesReducer, initCities);
-  //   const [cities, setCities] = useState<CitiesT>(initCities.cities);
-  //   const [error, setError] = useState<Error | null>(initCities.error);
+  // const [state, dispatch] = useReducer(CitiesReducer, citiesContext);
+  const [cities, setCities] = useState<CitiesT>(citiesContext.cities);
+  const [error, setError] = useState<Error | null>(citiesContext.error);
   //   const [getCities, setGetCities] = useState(initCities.getCities);
   // const [getState, setState] = useState(initCities);
   // // const [initCities, dispatch] = useReducer(CitiesReducer, []);
@@ -26,16 +36,17 @@ const CitiesContextProvider = (props: { children: React.ReactNode }) => {
         "http://localhost:5000/api/cities/"
       );
       const { data }: { data: CitiesT } = res;
-
-      dispatch({
-        type: CityContextActionTypes.GET_CITIES,
-        payload: data
-      });
+      setCities(data);
+      // dispatch({
+      //   type: CityContextActionTypes.GET_CITIES,
+      //   payload: data
+      // });
     } catch (error) {
-      dispatch({
-        type: CityContextActionTypes.ERROR_CITIES,
-        payload: error
-      });
+      setError(error);
+      // dispatch({
+      //   type: CityContextActionTypes.ERROR_CITIES,
+      //   payload: error
+      // });
     }
   };
   const postCity = async (newCity: CityI) => {
@@ -49,19 +60,25 @@ const CitiesContextProvider = (props: { children: React.ReactNode }) => {
       console.log(res);
       let { data }: { data: CityI } = await res;
       console.log("data", data);
-      dispatch({
-        type: CityContextActionTypes.POST_CITY,
-        payload: data
-      });
+      // dispatch({
+      //   type: CityContextActionTypes.POST_CITY,
+      //   payload: data
+      // });
+      const newCitiesData = {
+        ...cities,
+        data
+      };
+      setCities(newCitiesData);
     } catch (error) {
-      dispatch({
-        type: CityContextActionTypes.ERROR_CITIES,
-        payload: error
-      });
+      setError(error);
+      // dispatch({
+      //   type: CityContextActionTypes.ERROR_CITIES,
+      //   payload: error
+      // });
     }
   };
   return (
-    <CitiesContext.Provider value={{ state, getCities, postCity }}>
+    <CitiesContext.Provider value={{ cities, error, getCities, postCity }}>
       {props.children}
     </CitiesContext.Provider>
   );

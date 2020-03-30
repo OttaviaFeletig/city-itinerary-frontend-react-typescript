@@ -5,11 +5,15 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import CitiesContextProvider from "./context/cities/CityContext";
+import EventContextProvider from "./context/events/EventContext";
 ReactDOM.render(
   // <Provider store={store}>
-  <CitiesContextProvider>
+
+  // <CitiesContextProvider>
+  <EventContextProvider>
     <App />
-  </CitiesContextProvider>,
+  </EventContextProvider>,
+  // </CitiesContextProvider>,
   // </Provider>
   document.getElementById("root")
 );

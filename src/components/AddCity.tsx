@@ -17,10 +17,10 @@ import axios from "axios";
 import firebase from "firebase/app";
 const storage = require("../Firebase/index");
 const countries = require("countries-cities").getCountries();
-let cities: Array<string> = [];
+let citiesList: Array<string> = [];
 
 const AddCity: React.FC<FunctionProps> = ({ handleClose }) => {
-  const { state, postCity } = useContext(CitiesContext);
+  const { cities, error, postCity } = useContext(CitiesContext);
   const { button, form } = modalStyle();
   const [values, setValues] = React.useState({
     name: "",
@@ -41,7 +41,7 @@ const AddCity: React.FC<FunctionProps> = ({ handleClose }) => {
     } else {
       const value: string = e.currentTarget.innerHTML;
       setValues({ ...values, country: value });
-      cities = require("countries-cities").getCities(value);
+      citiesList = require("countries-cities").getCities(value);
     }
   };
   const selectCity = (e: ChangeEvent<any>) => {

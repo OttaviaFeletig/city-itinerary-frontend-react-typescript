@@ -3,3 +3,9 @@ export enum CityContextActionTypes {
   ERROR_CITIES = "ERROR_CITIES",
   POST_CITY = "POST_CITY"
 }
+
+export enum EventContextActionTypes {
+  GET_EVENTS_FROM_RADIUS = "GET_EVENTS_FROM_RADIUS",
+  ERROR_EVENTS = "ERROR_EVENTS",
+  POST_EVENT = "POST_EVENT"
+}

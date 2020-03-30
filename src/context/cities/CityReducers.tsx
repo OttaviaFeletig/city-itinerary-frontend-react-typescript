@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { CityContextActionTypes } from "../type";
 
-const CitiesReducer = (state: any, action: any) => {
+const CitiesReducer = (state: InitCitiesI, action: any) => {
   switch (action.type) {
     case CityContextActionTypes.GET_CITIES:
       return {
